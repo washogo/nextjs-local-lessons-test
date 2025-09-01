@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { User } from '@/types/user';
 import BackButton from './BackButton';
@@ -34,6 +35,15 @@ export default async function UserDetailPage({ params }: UserDetailPageProps) {
 
         <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl">
           <div className="flex items-center space-x-6 mb-8">
+            <div className="relative w-32 h-32 rounded-full overflow-hidden">
+              <Image
+                src={`https://robohash.org/${user.id}`}
+                alt={`${user.username}のアバター`}
+                fill
+                className="object-cover"
+                sizes="128px"
+              />
+            </div>
             <div>
               <h2 className="text-2xl font-bold text-gray-800 mb-2">{user.username}</h2>
               <p className="text-gray-600">{user.name}</p>
