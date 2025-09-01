@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { User } from '@/types/user';
 
@@ -18,9 +19,20 @@ export default async function UsersPage() {
       <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {users.map((user) => (
           <li key={user.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-            <div className="mb-4">
-              <p className="text-sm text-gray-500">ID: {user.id}</p>
-              <h3 className="font-semibold text-lg text-gray-800">{user.username}</h3>
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                <Image
+                  src={`https://robohash.org/${user.id}`}
+                  alt={`${user.username}のアバター`}
+                  fill
+                  className="object-cover"
+                  sizes="64px"
+                />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">ID: {user.id}</p>
+                <h3 className="font-semibold text-lg text-gray-800">{user.username}</h3>
+              </div>
             </div>
             <div className="mb-4">
               <p className="text-gray-600 mb-2">
