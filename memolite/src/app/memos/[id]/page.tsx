@@ -1,6 +1,7 @@
 import { Memo } from '@/types/memo';
 import { apiUrl } from '@/lib/api';
 import { notFound } from 'next/navigation';
+import EditMemoForm from './EditMemoForm';
 
 async function fetchMemo(id: string): Promise<Memo | null> {
   const res = await fetch(apiUrl(`/api/memos/${id}`), { cache: 'no-store' });
@@ -23,6 +24,7 @@ export default async function MemoDetail({ params }: { params: Promise<{ id: str
           作成: {new Date(memo.created_at).toLocaleString()} / 更新: {new Date(memo.updated_at).toLocaleString()}
         </p>
       </div>
+      <EditMemoForm id={memo.id} initialTitle={memo.title} initialContent={memo.content} />
     </div>
   );
 }
