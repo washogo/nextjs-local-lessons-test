@@ -1,7 +1,9 @@
+import BackButton from './BackButton';
 import { Memo } from '@/types/memo';
 import { apiUrl } from '@/lib/api';
 import { notFound } from 'next/navigation';
 import EditMemoForm from './EditMemoForm';
+import DeleteMemoButton from './DeleteMemoButton';
 
 async function fetchMemo(id: string): Promise<Memo | null> {
   const res = await fetch(apiUrl(`/api/memos/${id}`), { cache: 'no-store' });
@@ -25,6 +27,10 @@ export default async function MemoDetail({ params }: { params: Promise<{ id: str
         </p>
       </div>
       <EditMemoForm id={memo.id} initialTitle={memo.title} initialContent={memo.content} />
+      <div className="space-x-3">
+        <DeleteMemoButton id={memo.id} />
+        <BackButton />
+      </div>
     </div>
   );
 }
